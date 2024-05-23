@@ -1,19 +1,66 @@
 package edu.bbte.realTimeWeb.hotelReservations.hotelService.service.security;
 
-import lombok.AllArgsConstructor;
+import edu.bbte.realTimeWeb.hotelReservations.hotelService.model.UserRequestMessage;
+import edu.bbte.realTimeWeb.hotelReservations.hotelService.model.UserResponseMessage;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+
 @Service
+@Slf4j
 public class UserDetailsServiceImp implements UserDetailsService {
+    private final KafkaTemplate<String, UserRequestMessage> kafkaTemplate;
+    private final String kafkaProduceTopic;
+    private final ConcurrentHashMap<String, CompletableFuture<UserDetails>>
+            pendingRequest = new ConcurrentHashMap<>();
+
+    public UserDetailsServiceImp(KafkaTemplate<String, UserRequestMessage> kafkaTemplate,
+                                 @Value("${kafkaProduceTopic}") String kafkaProduceTopic) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaProduceTopic = kafkaProduceTopic;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " not found"));
-        throw new UsernameNotFoundException("User with name " + username + " not found");
+        try {
+            return getUserByUsername(username).get();
+        } catch (InterruptedException | ExecutionException e) {
+            return null;
+        }
+
     }
+
+    @KafkaListener(topics = "${kafkaConsumeTopic}",
+            groupId = "${spring.kafka.consumer.group-id}")
+    public void listenToUserRequest(UserResponseMessage userResponseMessage) {
+        LOGGER.info("Received message: {}", userResponseMessage);
+        if (userResponseMessage.getUser() == null) {
+            throw new UsernameNotFoundException("User " + userResponseMessage.getUsername() + " not found");
+        }
+        CompletableFuture<UserDetails> future = pendingRequest.remove(userResponseMessage.getRequestId());
+        if (future != null) {
+            future.complete(userResponseMessage.getUser());
+        }
+    }
+
+
+    private CompletableFuture<UserDetails> getUserByUsername(String username) {
+        String requestId = UUID.randomUUID().toString();
+        UserRequestMessage userRequestMessage = new UserRequestMessage(requestId, username);
+        CompletableFuture<UserDetails> future = new CompletableFuture<>();
+        pendingRequest.put(requestId, future);
+        kafkaTemplate.send(kafkaProduceTopic, userRequestMessage);
+        return future;
+    }
+
 }

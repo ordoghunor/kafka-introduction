@@ -1,6 +1,28 @@
 spring:
   profiles:
     active: jpa
+  kafka:
+    #    kafka setting
+    admin:
+      auto-create: true
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: hotelServiceGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+kafkaConsumeTopic: user-response-topic
+kafkaProduceTopic: user-request-topic
 
 jwtSecret: 03464c394de0ccd6159c549cfee000ad5be78e8ea82adab3f39eb42f73ec9849
 

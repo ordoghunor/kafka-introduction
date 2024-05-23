@@ -22,6 +22,9 @@ public class JwtService {
     }
 
     public boolean verifyToken(String token, UserDetails user) {
+        if( user == null) {
+            return false;
+        }
         Claims claims = decodeTokenPayload(token);
         // verify username is the same
         return claims.getSubject().equals(user.getUsername())
