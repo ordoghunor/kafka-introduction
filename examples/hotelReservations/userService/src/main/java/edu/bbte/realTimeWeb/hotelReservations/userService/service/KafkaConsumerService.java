@@ -1,7 +1,7 @@
 package edu.bbte.realTimeWeb.hotelReservations.userService.service;
 
 import edu.bbte.realTimeWeb.hotelReservations.userService.model.User;
-import edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestMessage;
+import edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestedMessage;
 import edu.bbte.realTimeWeb.hotelReservations.userService.model.UserResponseMessage;
 import edu.bbte.realTimeWeb.hotelReservations.userService.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class KafkaConsumerService {
 
     @KafkaListener(topics = "${kafkaConsumeTopic}",
             groupId = "${spring.kafka.consumer.group-id}")
-    public void listenToUserRequest(UserRequestMessage userRequestMessage) {
+    public void listenToUserRequest(UserRequestedMessage userRequestMessage) {
         LOGGER.info("Received request for user with message: {}", userRequestMessage);
         User user = userRepository.findByUsername(userRequestMessage.getUsername()).orElse(null);
         UserResponseMessage userResponseMessage = new UserResponseMessage(user, userRequestMessage.getRequestId(),

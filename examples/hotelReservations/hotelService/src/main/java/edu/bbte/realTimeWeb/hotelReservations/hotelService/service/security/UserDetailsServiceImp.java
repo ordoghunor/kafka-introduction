@@ -59,6 +59,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
         UserRequestMessage userRequestMessage = new UserRequestMessage(requestId, username);
         CompletableFuture<UserDetails> future = new CompletableFuture<>();
         pendingRequest.put(requestId, future);
+        LOGGER.info("Sending request: {}", userRequestMessage);
         kafkaTemplate.send(kafkaProduceTopic, userRequestMessage);
         return future;
     }

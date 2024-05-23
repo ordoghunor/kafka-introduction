@@ -7,7 +7,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @ToString
-public class UserRequestMessage {
+public class UserRequestedMessage {
     private String requestId;
     private String username;
 }
