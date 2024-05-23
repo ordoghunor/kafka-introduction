@@ -1,4 +1,0 @@
-plugins {
-    id 'org.springframework.boot' version '3.2.4'
-}
-group = 'edu.bbte.realTimeWeb.hotelReservations.bookingService'

@@ -1,5 +1,4 @@
 rootProject.name = 'hotelReservations'
 include 'userService'
 include 'hotelService'
-include 'bookingService'
 
