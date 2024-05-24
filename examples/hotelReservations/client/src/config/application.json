@@ -1,0 +1,16 @@
+{
+  "serverUrl": "http://localhost:8080",
+  "limitQuerryParamName": "limit",
+  "limitQuerryParamDefault": "5",
+  "pageQuerryParamName": "page",
+  "pageQuerryParamDefault": "1",
+  "distanceQuerryParamName": "distanceKm",
+  "distanceParamDefault": 150,
+  "latQuerryParamName": "userLat",
+  "longQuerryParamName": "userLong",
+  "latDefaultValue": 46.770439,
+  "longDefaultValue": 23.591423,
+  "startDateQuerryParamName": "startDate",
+  "endDateQuerryParamName": "endDate"
+
+}
