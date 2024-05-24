@@ -1,5 +1,5 @@
 {
-  "serverUrl": "http://localhost:8080",
+  "serverUrl": "http://localhost:80",
   "limitQuerryParamName": "limit",
   "limitQuerryParamDefault": "5",
   "pageQuerryParamName": "page",
