@@ -5,6 +5,7 @@
 % \usepackage{definitions}
 \usepackage[british]{babel}
 \usepackage{color, soul}
+\usepackage{tikz}
 
 %% tikz tricks
 % \tikzset{onslide/.code args={<#1>#2}{%
@@ -108,19 +109,50 @@
 
 \begin{frame}{Kafka Components}
   \begin{itemize}
-    \item \hl{Producer}
+    \item Producer
     \item Consumer
     \item Broker
+    \item Cluster
     \item Topic
     \item Partitions
     \item Offset
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item \hl{Producer}
+    \item Consumer
+    \item Broker
+    \item Cluster
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Producer}
-
+  \begin{itemize}
+    \item A producer is the source of data who will publish events.
+  \end{itemize}
+  \vspace*{1.5em}
+  \includegraphics[scale=0.192]{fig/producer.png}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -128,16 +160,27 @@
     \item Producer
     \item \hl{Consumer}
     \item Broker
+    \item Cluster
     \item Topic
     \item Partitions
     \item Offset
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Consumer}
-
+  \begin{itemize}
+    \item A consumer acts as a receiver, consumes events.
+  \end{itemize}
+  \vspace*{1.5em}
+  \includegraphics[scale=0.16]{fig/consumer.png}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -145,16 +188,28 @@
     \item Producer
     \item Consumer
     \item \hl{Broker}
+    \item Cluster
     \item Topic
     \item Partitions
     \item Offset
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Broker}
-
+  \begin{itemize}
+    \item The Kafka Broker is the Kafka server.
+    \item A broker is an intermediate entity that helps in message exchanges between producers and consumers.
+  \end{itemize}
+  \vspace*{1.5em}
+  \includegraphics[scale=0.15]{fig/broker.png}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -162,16 +217,57 @@
     \item Producer
     \item Consumer
     \item Broker
+    \item \hl{Cluster}
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Cluster}
+  \begin{itemize}
+    \item There can be one or more brokers in the Kafka cluster.
+    \item Its distributed architecture is one of the reasons that made Kafka so popular.
+    \item The Brokers is what makes it so resilient, reliable, scalable, and fault-tolerant.
+  \end{itemize}
+  \vspace*{0.1em}
+  \includegraphics[scale=0.15]{fig/cluster.png}
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item Cluster
     \item \hl{Topic}
     \item Partitions
     \item Offset
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Topic}
-
+  \begin{itemize}
+    \item Specifies the category of the message or the classification of the message.
+    \item Consumers can then just respond to the messages that belong to the topics they are listening on.
+  \end{itemize}
+  \includegraphics[width=0.98\textwidth]{fig/topic.png}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -179,16 +275,25 @@
     \item Producer
     \item Consumer
     \item Broker
+    \item Cluster
     \item Topic
     \item \hl{Partitions}
     \item Offset
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Partitions}
-
+  \begin{itemize}
+    \item
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -196,16 +301,25 @@
     \item Producer
     \item Consumer
     \item Broker
+    \item Cluster
     \item Topic
     \item Partitions
     \item \hl{Offset}
     \item Consumer Groups
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Offset}
-
+  \begin{itemize}
+    \item
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -213,16 +327,25 @@
     \item Producer
     \item Consumer
     \item Broker
+    \item Cluster
     \item Topic
     \item Partitions
     \item Offset
     \item \hl{Consumer Groups}
     \item Zookeeper
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Consumer Groups}
-
+  \begin{itemize}
+    \item
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -230,16 +353,25 @@
     \item Producer
     \item Consumer
     \item Broker
+    \item Cluster
     \item Topic
     \item Partitions
     \item Offset
     \item Consumer Groups
     \item \hl{Zookeeper}
   \end{itemize}
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[left=3em] at (current page.east)
+    {
+      \includegraphics[width=0.35\textwidth]{fig/kafka_logo.png}
+    };
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Kafka Components}{Zookeeper}
-
+  \begin{itemize}
+    \item
+  \end{itemize}
 \end{frame}
 
 \end{document}
