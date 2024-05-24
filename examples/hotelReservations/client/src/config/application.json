@@ -11,6 +11,6 @@
   "latDefaultValue": 46.770439,
   "longDefaultValue": 23.591423,
   "startDateQuerryParamName": "startDate",
-  "endDateQuerryParamName": "endDate"
-
+  "endDateQuerryParamName": "endDate",
+  "userQuerryParamName": "userId"
 }

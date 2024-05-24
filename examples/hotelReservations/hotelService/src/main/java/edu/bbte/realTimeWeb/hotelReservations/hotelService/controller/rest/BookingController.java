@@ -39,11 +39,12 @@ public class BookingController {
     @GetMapping
     public BookingListingWithPaginationDto findPaginated(
             @RequestParam(defaultValue = "1", required = false) @Positive int page,
-            @RequestParam(defaultValue = "5", required = false) @Positive int limit) {
+            @RequestParam(defaultValue = "5", required = false) @Positive int limit,
+            @RequestParam() @Positive Long userId) {
         LOGGER.info("GET paginated bookings at bookings api, "
-                + "page: {}, limit: {}", page, limit);
+                + "userId: {}, page: {}, limit: {}", userId, page, limit);
         PageRequest pageRequest = PageRequest.of(page - 1, limit, Sort.by("reservationStartDate"));
-        Page<Booking> bookingPage = bookingRepository.findAll(pageRequest);
+        Page<Booking> bookingPage = bookingRepository.findAllByUserId(userId, pageRequest);
         List<BookingListingDto> bookingListingDtos = bookingMapper.modelsToListingDtos(bookingPage.getContent());
         Pagination pagination = new Pagination(page, limit,
                 bookingPage.getTotalElements(), bookingPage.getTotalPages());
