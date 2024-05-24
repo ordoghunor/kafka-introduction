@@ -1,0 +1,106 @@
+\documentclass{beamer}
+% Try the class options [notes], [notes=only], [trans], [handout],
+% [red], [compress], [draft] and see what happens!
+
+% \usepackage{definitions}
+\usepackage[british]{babel}
+
+%% tikz tricks
+% \tikzset{onslide/.code args={<#1>#2}{%
+%   \only<#1>{\pgfkeysalso{#2}} 
+% }}
+
+\pdfinfo{
+        /Title (cim)
+        /Creator (LaTeX)
+        /Producer (pdflatex)
+        /Author (szerzo)
+        /CreationDate (datum)
+	/Subject (tema)
+}
+
+
+\mode<article> % only for the article version
+{
+  \usepackage{fullpage}
+  \usepackage{hyperref}
+}
+\mode<presentation>
+{
+  \usetheme[left,width=0.65in,height=0.55in]{Kolozsvar}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{footline}%
+     {\vspace*{-1.4em}\hspace*{0.66in}\textbf{\insertframenumber/\inserttotalframenumber}\newline\vspace*{0.4em}}
+		\setbeamerfont{block title}{size=\larger} % RELSIZE -- html-sizes 
+		\usefonttheme{professionalfonts}
+		\setbeamercolor{math text}{fg=green!30!red!30!brown}
+		\setbeamercolor{normal text in math text}{parent=math text}
+}
+
+\setbeamercovered{dynamic}
+
+% The following info should normally be given in you main file:
+\title[Apache Kafka]{Apache Kafka}
+%
+\author{ Hunor Ördög, Norbert-Raymond Pap}
+%
+\institute[UBB Cluj-Napoca]{
+  Department of Mathematics and Informatics\\
+  Babe{\c{s}}--Bolyai University, Cluj-Napoca}
+%
+\date{2024 May}
+
+
+\begin{document}
+
+\frame{\maketitle}
+
+\mode<presentation>
+{
+  % \begin{frame}
+  %   \frametitle{Talk structure}
+  % \tableofcontents
+  % \end{frame} 
+
+  % \AtBeginSection[]
+  {
+      \begin{frame}<beamer>{Contents}
+        % \tableofcontents[currentsection,currentsubsection,hideothersubsections]
+        \tableofcontents
+      \end{frame}
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[What is Kafka \& Why we need it?]{What is Kafka \& Why we need it?}
+
+\begin{frame}{Problem Statement}
+  \begin{itemize}
+    \item \textbf{Complexity of Image Analysis}: Dental X-ray images often contain subtle features
+          that are challenging to detect and interpret accurately.
+    \item \textbf{Variability in Disease Presentation}: Dental diseases can manifest in various forms and severities,
+          requiring nuanced diagnosis.
+    \item \textbf{Limited Accessibility to Expertise}: Access to specialized dental professionals for
+          accurate diagnosis may be limited, especially in underserved regions.
+  \end{itemize}
+\end{frame}
+
+
+\section[Kafka components \& Internal Architecture]{Kafka components \& Internal Architecture}
+
+\begin{frame}{Approach}
+  \begin{itemize}
+    \item Utilize deep learning, particularly CNNs, for feature extraction and classification from dental X-ray images.\cite{chen2021dental}
+    \item Develop novel data augmentation techniques to enhance model robustness and generalization.\cite{lee2018detection}
+    \item Focus on developing interpretable models to increase trust in clinical practice.\cite{setiabudi2017expert}
+    \item Address class imbalance using advanced techniques such as weighted loss functions.\cite{litjens2017survey}
+    \item Design a clinical integration framework for seamless deployment in dental practices.
+  \end{itemize}
+\end{frame}
+
+
+\section[Expected Outcomes]{Expected Outcomes}
+
+
+\end{document}
