@@ -4,6 +4,7 @@
 
 % \usepackage{definitions}
 \usepackage[british]{babel}
+\usepackage{color, soul}
 
 %% tikz tricks
 % \tikzset{onslide/.code args={<#1>#2}{%
@@ -73,34 +74,172 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[What is Kafka \& Why we need it?]{What is Kafka \& Why we need it?}
+\section[What is Kafka?]{What is Kafka?}
 
-\begin{frame}{Problem Statement}
+\begin{frame}{What is Kafka?}
+  \includegraphics[scale=0.25]{fig/kafka_logo.png}
+  \vspace*{2em}
   \begin{itemize}
-    \item \textbf{Complexity of Image Analysis}: Dental X-ray images often contain subtle features
-          that are challenging to detect and interpret accurately.
-    \item \textbf{Variability in Disease Presentation}: Dental diseases can manifest in various forms and severities,
-          requiring nuanced diagnosis.
-    \item \textbf{Limited Accessibility to Expertise}: Access to specialized dental professionals for
-          accurate diagnosis may be limited, especially in underserved regions.
+    \item Open-source \underline{distributed event streaming platform}.
   \end{itemize}
 \end{frame}
 
+\begin{frame}{What is a “distributed streaming platform”?}
+  \begin{itemize}
+    \item Streams are just infinite data, data that never ends.
+    \item Distributed means Kafka works in a cluster, each node in the cluster is called a \textbf{Broker}.
+          % Brokers are just servers executing a copy of apache kafka.
+          \vspace*{1em}
+    \item Kafka is a set of machines working together to be able to handle and process real-time infinite data.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Where does Kafka come from?}
+  \begin{itemize}
+    \item Kafka was originally developed at LinkedIn \includegraphics[scale=0.006]{fig/linkedin_logo.png} in 2010
+    \item Open sourced in early 2011
+  \end{itemize}
+  \includegraphics[scale=0.17]{fig/apache_software.png}
+\end{frame}
+% 2012 ota Apache Kafka neven ismert es azota ok tartsak karban
 
 \section[Kafka components \& Internal Architecture]{Kafka components \& Internal Architecture}
 
-\begin{frame}{Approach}
+\begin{frame}{Kafka Components}
   \begin{itemize}
-    \item Utilize deep learning, particularly CNNs, for feature extraction and classification from dental X-ray images.\cite{chen2021dental}
-    \item Develop novel data augmentation techniques to enhance model robustness and generalization.\cite{lee2018detection}
-    \item Focus on developing interpretable models to increase trust in clinical practice.\cite{setiabudi2017expert}
-    \item Address class imbalance using advanced techniques such as weighted loss functions.\cite{litjens2017survey}
-    \item Design a clinical integration framework for seamless deployment in dental practices.
+    \item \hl{Producer}
+    \item Consumer
+    \item Broker
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Kafka Components}{Producer}
 
-\section[Expected Outcomes]{Expected Outcomes}
+\end{frame}
 
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item \hl{Consumer}
+    \item Broker
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Consumer}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item \hl{Broker}
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Broker}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item \hl{Topic}
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Topic}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item Topic
+    \item \hl{Partitions}
+    \item Offset
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Partitions}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item Topic
+    \item Partitions
+    \item \hl{Offset}
+    \item Consumer Groups
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Offset}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item \hl{Consumer Groups}
+    \item Zookeeper
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Consumer Groups}
+
+\end{frame}
+
+\begin{frame}{Kafka Components}
+  \begin{itemize}
+    \item Producer
+    \item Consumer
+    \item Broker
+    \item Topic
+    \item Partitions
+    \item Offset
+    \item Consumer Groups
+    \item \hl{Zookeeper}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Kafka Components}{Zookeeper}
+
+\end{frame}
 
 \end{document}
