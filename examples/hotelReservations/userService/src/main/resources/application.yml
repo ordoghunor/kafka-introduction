@@ -14,8 +14,8 @@ spring:
       properties:
         spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.value.default.type: "edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestedMessage"
-        spring.json.type.mapping: userRequestMessage:edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestedMessage
+#        spring.json.value.default.type: "edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestedMessage"
+        spring.json.use.type.headers: false
         spring:
           json:
             trusted:

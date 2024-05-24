@@ -25,12 +25,14 @@ public class KafkaConsumerService {
     }
 
     @KafkaListener(topics = "${kafkaConsumeTopic}",
-            groupId = "${spring.kafka.consumer.group-id}")
+            groupId = "${spring.kafka.consumer.group-id}",
+            properties = {"spring.json.value.default.type=edu.bbte.realTimeWeb.hotelReservations.userService.model.UserRequestedMessage"})
     public void listenToUserRequest(UserRequestedMessage userRequestMessage) {
         LOGGER.info("Received request for user with message: {}", userRequestMessage);
         User user = userRepository.findByUsername(userRequestMessage.getUsername()).orElse(null);
         UserResponseMessage userResponseMessage = new UserResponseMessage(user, userRequestMessage.getRequestId(),
                 userRequestMessage.getUsername());
+        LOGGER.info("Sending response: {}", userResponseMessage);
         kafkaTemplate.send(kafkaProduceTopic, userResponseMessage);
     }
 }
