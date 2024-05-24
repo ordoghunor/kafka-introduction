@@ -27,6 +27,7 @@ spring:
 
 kafkaConsumeTopic: user-request-topic
 kafkaProduceTopic: user-response-topic
+kafkaConsumeTopicUserHistory: user-history-topic
 
 jwtSecret: 03464c394de0ccd6159c549cfee000ad5be78e8ea82adab3f39eb42f73ec9849
 

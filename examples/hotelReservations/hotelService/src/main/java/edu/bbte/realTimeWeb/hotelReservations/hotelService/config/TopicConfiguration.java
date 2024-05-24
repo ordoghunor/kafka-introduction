@@ -9,17 +9,29 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class TopicConfiguration {
-    private final String kafkaProduceTopic;
+    private final String kafkaProduceTopicUserRequest;
+    private final String kafkaProduceTopicUserHistory;
 
 
-    public TopicConfiguration(@Value("${kafkaProduceTopic}") String kafkaProduceTopic) {
-        this.kafkaProduceTopic = kafkaProduceTopic;
+    public TopicConfiguration(@Value("${kafkaProduceTopic}") String kafkaProduceTopicUserRequest,
+                              @Value("${kafkaProduceTopicUserHistory}") String  kafkaProduceTopicUserHistory ) {
+        this.kafkaProduceTopicUserRequest = kafkaProduceTopicUserRequest;
+        this.kafkaProduceTopicUserHistory = kafkaProduceTopicUserHistory;
     }
 
     @Bean
-    public NewTopic produceTopic()
+    public NewTopic produceTopicuserRequest()
     {
-        return TopicBuilder.name(kafkaProduceTopic)
+        return TopicBuilder.name(kafkaProduceTopicUserRequest)
+                .partitions(2)
+                .replicas(2)
+                .build();
+    }
+
+    @Bean
+    public NewTopic produceTopicUserHistory()
+    {
+        return TopicBuilder.name(kafkaProduceTopicUserHistory)
                 .partitions(2)
                 .replicas(2)
                 .build();

@@ -19,7 +19,7 @@ spring:
         spring:
           json:
             trusted:
-              packages: "*"
+              packages: "edu.bbte.realTimeWeb.hotelReservations.hotelService.model"
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -27,6 +27,7 @@ spring:
 
 kafkaConsumeTopic: user-response-topic
 kafkaProduceTopic: user-request-topic
+kafkaProduceTopicUserHistory: user-history-topic
 
 jwtSecret: 03464c394de0ccd6159c549cfee000ad5be78e8ea82adab3f39eb42f73ec9849
 
