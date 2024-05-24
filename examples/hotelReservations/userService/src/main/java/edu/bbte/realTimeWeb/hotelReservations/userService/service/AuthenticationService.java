@@ -2,6 +2,8 @@ package edu.bbte.realTimeWeb.hotelReservations.userService.service;
 
 import edu.bbte.realTimeWeb.hotelReservations.userService.model.Role;
 import edu.bbte.realTimeWeb.hotelReservations.userService.model.User;
+import edu.bbte.realTimeWeb.hotelReservations.userService.model.UserHistory;
+import edu.bbte.realTimeWeb.hotelReservations.userService.repository.UserHistoryRepository;
 import edu.bbte.realTimeWeb.hotelReservations.userService.repository.UserRepository;
 import edu.bbte.realTimeWeb.hotelReservations.userService.service.exception.InvalidTokenException;
 import edu.bbte.realTimeWeb.hotelReservations.userService.service.exception.NotFoundException;
@@ -23,6 +25,7 @@ import java.util.Date;
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
+    private final UserHistoryRepository userHistoryRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -53,6 +56,11 @@ public class AuthenticationService {
         // refreshToken is saved in db, deleted on logout
         user.setRefreshToken(refreshToken);
         userRepository.update(user.getId(), user);
+        UserHistory userHistory = new UserHistory();
+        userHistory.setUser(user);
+        userHistory.setDate(new Date());
+        userHistory.setActivity("Login");
+        userHistoryRepository.saveAndFlush(userHistory);
         // refreshToken is used in cookie, accesToken used by client application
         return Pair.of(accesToken, refreshToken);
 
