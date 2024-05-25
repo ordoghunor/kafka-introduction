@@ -238,8 +238,8 @@
     \item Its distributed architecture is one of the reasons that made Kafka so popular.
     \item The Brokers is what makes it so resilient, reliable, scalable, and fault-tolerant.
   \end{itemize}
-  \vspace*{0.1em}
-  \includegraphics[scale=0.15]{fig/cluster.png}
+  \vspace*{1em}
+  \includegraphics[width=1\textwidth]{fig/cluster.png}
 \end{frame}
 
 \begin{frame}{Kafka Components}
@@ -292,9 +292,20 @@
 
 \begin{frame}{Kafka Components}{Partitions}
   \begin{itemize}
-    \item
+    \item A topic is divided into \textbf{partitions}.
+    \item Each topic can have one or more partitions.
+    \item We need to specify the number of partitions when creating the topic.
   \end{itemize}
+  \hspace*{5em}
+  \includegraphics[width=0.57\textwidth]{fig/partitions.png}
 \end{frame}
+% If we don’t give any key to a message when we’re producing it, by default, 
+% the producers will send the message in a round-robin way, each partition will 
+% receive a message (even if they are sent by the same producer). Because of that, 
+% we aren’t able to guarantee the delivery order at the partition level, if we 
+% want to send a message always to the same partition, we need to 
+% give a key to our messages. This will ensure that the message will always 
+% be sent to the same partition;
 
 \begin{frame}{Kafka Components}
   \begin{itemize}
@@ -318,9 +329,14 @@
 
 \begin{frame}{Kafka Components}{Offset}
   \begin{itemize}
-    \item
+    \item Each message will be stored in the broker disk and will receive an \textbf{offset}.
+    \item Each partition has its own offsets.
+    \item Kafka stores the messages on the disk (like a database).
   \end{itemize}
+  \hspace*{1em}
+  \includegraphics[width=0.85\textwidth]{fig/offset.png}
 \end{frame}
+% Primarily he consumer keeps the offset value.
 
 \begin{frame}{Kafka Components}
   \begin{itemize}
@@ -344,9 +360,16 @@
 
 \begin{frame}{Kafka Components}{Consumer Groups}
   \begin{itemize}
-    \item
+    \item It becomes very costly when a single consumer needs to read from many partitions.
+    \item We need some sort of load-balancing, this is where \textbf{consumer groups} enter.
+    \item The ideal is to have the same number of consumers in a group that we have as partitions in a topic, in this way, every consumer read from only one.
   \end{itemize}
+  \hspace*{4.5em}
+  \includegraphics[width=0.65\textwidth]{fig/consumer_group.png}
 \end{frame}
+% When adding consumers to a group, you need to be careful, if the number of 
+% consumers is greater than the number of partitions, some consumers
+% will not read from any topic and will stay idle.
 
 \begin{frame}{Kafka Components}
   \begin{itemize}
@@ -369,6 +392,40 @@
 \end{frame}
 
 \begin{frame}{Kafka Components}{Zookeeper}
+  \begin{itemize}
+    \item \textbf{Zookeeper} is a prerequisite for Kafka.
+    \item Kafka is a distributed system, and it uses \textbf{Zookeeper} for coordination and to track the status of Kafka cluster nodes.
+    \item \textbf{Zookeeper} also keeps track of Kafka topics, partition, offsets.
+          % \item Basically it acts as a manager for the Kafka Cluster.
+  \end{itemize}
+  \hspace*{2.6em}
+  \includegraphics[width=0.84\textwidth]{fig/zookeeper.png}
+\end{frame}
+
+\begin{frame}{Internal Architecture}{Partition Leader}
+  \begin{itemize}
+    \item To ensure the reliability of the cluster, Kafka enters with the concept of the \textbf{Partition Leader}.
+    \item Only one leader can exist per partition in all brokers.
+    \item The leader is the only one that receives the messages, their replicas will just sync the data.
+    \item When a leader goes down, a replica will be automatically elected as a new leader by \textbf{Zookeeper}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Internal Architecture}{Acknowledgment}
+  \begin{itemize}
+    \item The \textbf{Acknowledgment (ack)} is a confirmation that the message was delivered.
+    \item In Kafka we can configure this ack in three different levels:
+          \vspace*{1.2em}
+    \item \textbf{ack = 0}: We dont want to receive ack from Kafka.
+    \item \textbf{ack = 1}: Default configuration, we want to receive an ack from the partition leader.
+    \item \textbf{ack = all}: We want to receive confirmation from partition leader and their replicas as well.
+  \end{itemize}
+\end{frame}
+
+
+\section[Kafka vs RabbitMQ]{Kafka vs RabbitMQ}
+
+\begin{frame}{Kafka vs RabbitMQ}
   \begin{itemize}
     \item
   \end{itemize}
