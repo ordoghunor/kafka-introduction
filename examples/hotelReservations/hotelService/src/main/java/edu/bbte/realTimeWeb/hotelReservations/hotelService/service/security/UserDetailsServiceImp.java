@@ -41,7 +41,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     @KafkaListener(topics = "${kafkaConsumeTopic}",
-            groupId = "${spring.kafka.consumer.group-id}")
+            groupId = "${spring.kafka.consumer.group-id}",
+            properties = {"spring.json.value.default.type=edu.bbte.realTimeWeb.hotelReservations.hotelService.model.UserResponseMessage"})
     public void listenToUserRequest(UserResponseMessage userResponseMessage) {
         LOGGER.info("Received message: {}", userResponseMessage);
         if (userResponseMessage.getUser() == null) {

@@ -6,7 +6,7 @@ import { BookingsList } from "../interface/BookingsList";
 import configuredAxios from "../axios/configuredAxios";
 import {
   limitQuerryParamDefault, limitQuerryParamName,
-  pageQuerryParamDefault, pageQuerryParamName,
+  pageQuerryParamDefault, pageQuerryParamName, userQuerryParamName
 } from '../config/application.json'
 import { Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -14,10 +14,12 @@ import Limit from "../components/Limit";
 import PaginationElement from "../components/PaginationElement";
 import BookingListingElement from "../components/BookingListingElement";
 import { SearchContext } from "../context/SearchContextProvider";
+import useAuth from "../hooks/useAuth";
 
 
 export default function BookingsAll() {
-  const [bookingsUrl, setBookingsUrl] = useState<string>('/api/bookings');
+  const {auth} = useAuth();
+  const [bookingsUrl, setBookingsUrl] = useState<string>(`/api/bookings?${userQuerryParamName}=${auth.userId}`);
   const { limit, page } = useContext(SearchContext);
 
   const { data: bookingsData, isError, error, isLoading } =
@@ -34,7 +36,12 @@ export default function BookingsAll() {
 
 
   useEffect(() => {
+    if(!auth.logged_in || !auth.userId) {
+      return;
+    }
     const queryParams = new URLSearchParams();
+    queryParams.set(userQuerryParamName, auth.userId.toString());
+
     if (limit !== limitQuerryParamDefault) {
       queryParams.set(limitQuerryParamName, limit);
     }
@@ -43,7 +50,7 @@ export default function BookingsAll() {
     }
     setBookingsUrl(`/api/bookings?${queryParams.toString()}`)
   }, [
-    limit, page,
+    limit, page, auth.userId
   ]);
 
 

@@ -10,7 +10,7 @@ export default function Navigationbar() {
   const { auth, setAuth } = useAuth();
 
   function logout() {
-    configuredAxios.get(`/logout`)
+    configuredAxios.post(`/logout`)
       .then(() => {
         setAuth({ username: undefined, logged_in: false, role: undefined, userId: undefined });
         navigate('/');

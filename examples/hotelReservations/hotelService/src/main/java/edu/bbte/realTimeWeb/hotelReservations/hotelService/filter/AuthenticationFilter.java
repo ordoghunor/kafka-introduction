@@ -46,7 +46,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             // user not already authenticated
             // get user data
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
             if (jwtService.verifyToken(token, userDetails)) {
                 // valid token, authenticate user
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails,

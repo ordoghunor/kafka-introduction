@@ -104,7 +104,7 @@ export default function BookingListingElement({ booking }: PropType) {
           {
             booking.rooms.length > 0 &&
             booking.rooms.map(currentRoom => (
-              <Row>
+              <Row key={`room_row_${currentRoom.roomId}`}>
                 {currentRoom.type === 1 &&
                   <Col xs lg='2' key={`room_${currentRoom.roomId}_roomType_21`}>
                     Single Room

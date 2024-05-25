@@ -6,5 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface BookingRepository extends Repository<Booking, Long> {
     Page<Booking> findAll(Pageable pageable);
+    Page<Booking> findAllByUserId(Long userId, Pageable pageable);
     void delete(Booking booking);
 }
